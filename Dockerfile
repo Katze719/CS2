@@ -1,0 +1,43 @@
+FROM steamcmd/steamcmd:ubuntu-22
+
+ENV INSTALL_DIR /data
+ENV STEAMAPPID 730
+ENV STEAMAPP cs2
+ENV STEAMAPPDIR "${INSTALL_DIR}"
+
+ENV CS2_SERVERNAME="cs2 private server" 
+ENV CS2_CHEATS=0 
+ENV CS2_IP=0.0.0.0 
+ENV CS2_SERVER_HIBERNATE=0 
+ENV CS2_PORT=27015 
+ENV CS2_RCON_PORT="" 
+ENV CS2_MAXPLAYERS=10 
+ENV CS2_RCONPW="changeme" 
+ENV CS2_PW="changeme" 
+ENV CS2_MAPGROUP="mg_active"
+ENV CS2_STARTMAP="de_inferno" 
+ENV CS2_GAMEALIAS="" 
+ENV CS2_GAMETYPE=0 
+ENV CS2_GAMEMODE=1 
+ENV CS2_LAN=0 
+ENV TV_AUTORECORD=0 
+ENV TV_ENABLE=0 
+ENV TV_PORT=27020 
+ENV TV_PW="changeme" 
+ENV TV_RELAY_PW="changeme" 
+ENV TV_MAXRATE=0 
+ENV TV_DELAY=0 
+ENV SRCDS_TOKEN="" 
+ENV CS2_ADDITIONAL_ARGS=""
+
+COPY ./run.sh /etc/run.sh
+COPY ./server.cfg /etc/server.cfg
+COPY ./cs2-patched.sh /etc/cs2-patched.sh
+
+
+ENTRYPOINT [ "/bin/bash" ]
+CMD [ "/etc/run.sh" ]
+
+EXPOSE 27015/tcp
+EXPOSE 27015/udp
+EXPOSE 27020/udp

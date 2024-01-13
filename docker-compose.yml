@@ -1,0 +1,15 @@
+version: '3.7'
+services:
+  cs2-server:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    container_name: cs2-dedicated
+    environment:
+      - UPDATE=1
+    ports:
+      - "27015:27015/tcp"           # TCP
+      - "27015:27015/udp"           # UDP
+      - "27020:27020/udp"           # UDP
+    volumes:
+      - ./data:/data
